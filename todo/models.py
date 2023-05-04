@@ -1,0 +1,10 @@
+from django.db import models
+
+# Create your models here.
+class Todo(models.Model):
+    user = models.ForeignKey('user.User', verbose_name="작성자", on_delete=models.CASCADE)
+    title = models.CharField("할일 제목", max_length=100)
+    is_complete = models.BooleanField("완료 여부", default=False)
+    created_at = models.DateTimeField("생성 시간", auto_now_add=True)
+    updated_at = models.DateTimeField("수정 시간", auto_now=True)
+    completion_at = models.DateTimeField("완료 시간", null=True, blank=True)
