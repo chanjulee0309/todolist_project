@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Todo(models.Model):
@@ -8,3 +9,9 @@ class Todo(models.Model):
     created_at = models.DateTimeField("생성 시간", auto_now_add=True)
     updated_at = models.DateTimeField("수정 시간", auto_now=True)
     completion_at = models.DateTimeField("완료 시간", null=True, blank=True)
+
+    def complete(self):
+        """todo를 완료합니다."""
+        self.is_complete = True
+        self.completion_at = timezone.now()
+        self.save()
